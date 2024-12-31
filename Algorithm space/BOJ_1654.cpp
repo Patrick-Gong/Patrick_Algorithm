@@ -4,21 +4,22 @@
 using namespace std;
 
 int main() {
-  int K, N;
-  int result;
+  ios::sync_with_stdio(false);
+  cin.tie(NULL);
+
+  unsigned int K, N;
+  unsigned int result = 0;
 
   cin >> K >> N;
-
-  vector<int> input(K), tmp;
+  unsigned int maxi = 0;
+  vector<unsigned int> input(K);
   for (int i = 0; i < K; i++) {
     cin >> input[i];
+    maxi = max(maxi, input[i]);
   }
 
-  int maxI = *max_element(input.begin(), input.end());
+  unsigned int left = 1, right = maxi, mid;
 
-  int left = 1;
-  int right = maxI;
-  int mid;
   while (left <= right) {
     mid = (left + right) / 2;
 
@@ -37,4 +38,6 @@ int main() {
   }
 
   cout << result;
+
+  return 0;
 }
