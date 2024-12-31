@@ -4,30 +4,37 @@
 using namespace std;
 
 int main() {
-  int K, N, tmp;
-  int m = 1;
-  int sum;
-  int result = 0;
+  int K, N;
+  int result;
 
   cin >> K >> N;
-  vector<int> input;
+
+  vector<int> input(K), tmp;
   for (int i = 0; i < K; i++) {
-    cin >> tmp;
-    input.push_back(tmp);
+    cin >> input[i];
   }
-  
-  while (1) {
+
+  int maxI = *max_element(input.begin(), input.end());
+
+  int left = 1;
+  int right = maxI;
+  int mid;
+  while (left <= right) {
+    mid = (left + right) / 2;
+
+    int sum = 0;
+
     for (int j = 0; j < K; j++) {
-      sum = input[j] / m;
+      sum += input[j] / mid;
     }
+
     if (sum < N) {
-      break;
+      right = mid - 1;
+    } else {
+      left = mid + 1;
+      result = max(result, mid);
     }
-    result++;
-    m++;
   }
 
-  cout << tmp;
-
-  return 0;
+  cout << result;
 }
